@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="pdt tools" url="http://pdt-tools.sourceforge.jp/update">
+      PDT Tools update site
+   </description>
+   <feature url="features/jp.sourceforge.pdt_tools.indentGuide.feature_1.3.2.v20120803.jar" id="jp.sourceforge.pdt_tools.indentGuide.feature" version="1.3.2.v20120803">
+      <category name="pdt_tools.general"/>
+   </feature>
+   <category-def name="pdt_tools.general" label="General">
+      <description>
+         General plugins
+      </description>
+   </category-def>
+</site>
