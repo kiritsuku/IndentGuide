@@ -5,3 +5,6 @@ This plug-in adds 'Indent Guide' (vertical line on indentation columns) to eclip
 
 ### Update Site
 http://atlanto.github.com/IndentGuide/update
+
+### Web page
+http://atlanto.github.com/IndentGuide
