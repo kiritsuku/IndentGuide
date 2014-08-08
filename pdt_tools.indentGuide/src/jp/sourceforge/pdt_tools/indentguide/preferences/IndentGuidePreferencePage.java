@@ -59,30 +59,30 @@ public class IndentGuidePreferencePage extends PreferencePage implements
 				IContentTypeManager.CT_TEXT);
 	}
 
-	public void init(IWorkbench workbench) {
+	public void init(final IWorkbench workbench) {
 	}
 
 	@Override
-	protected Control createContents(Composite parent) {
-		Composite composite = new Composite(parent, SWT.NONE);
+	protected Control createContents(final Composite parent) {
+		final Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, true));
 
 		enabled = new Button(composite, SWT.CHECK);
 		enabled.setText(Messages.IndentGuidePreferencePage_enabled_label);
 		enabled.addSelectionListener(new SelectionAdapter() {
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void widgetSelected(final SelectionEvent e) {
 				super.widgetSelected(e);
 				enableControls(enabled.getSelection());
 			}
 		});
 
-		Group group = new Group(composite, SWT.NONE);
+		final Group group = new Group(composite, SWT.NONE);
 		group.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
 		group.setLayout(new GridLayout(1, true));
 		group.setText(Messages.IndentGuidePreferencePage_group_label);
 		attributes = new Composite(group, SWT.NONE);
-		GridData gridData = new GridData(SWT.FILL, SWT.BEGINNING, true, false);
+		final GridData gridData = new GridData(SWT.FILL, SWT.BEGINNING, true, false);
 		gridData.horizontalIndent = 5;
 		attributes.setLayoutData(gridData);
 		attributes.setLayout(new GridLayout(2, false));
@@ -110,7 +110,7 @@ public class IndentGuidePreferencePage extends PreferencePage implements
 				Messages.IndentGuidePreferencePage_color_label, attributes);
 		colorFieldEditor.setPreferenceStore(getPreferenceStore());
 
-		Group group2 = new Group(composite, SWT.NONE);
+		final Group group2 = new Group(composite, SWT.NONE);
 		group2.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
 		group2.setLayout(new GridLayout(1, true));
 		group2.setText(Messages.IndentGuidePreferencePage_group2_label);
@@ -128,7 +128,7 @@ public class IndentGuidePreferencePage extends PreferencePage implements
 		skipCommentBlock
 				.setText(Messages.IndentGuidePreferencePage_skip_comment_block_label);
 
-		Group group3 = new Group(composite, SWT.NONE);
+		final Group group3 = new Group(composite, SWT.NONE);
 		group3.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
 		group3.setLayout(new GridLayout(1, true));
 		group3.setText(Messages.IndentGuidePreferencePage_group3_label);
@@ -138,7 +138,7 @@ public class IndentGuidePreferencePage extends PreferencePage implements
 
 		contentTypesTree = new Tree(target, SWT.CHECK | SWT.BORDER
 				| SWT.V_SCROLL | SWT.H_SCROLL);
-		GridData gridData2 = new GridData(SWT.FILL, SWT.BEGINNING, true, false);
+		final GridData gridData2 = new GridData(SWT.FILL, SWT.BEGINNING, true, false);
 		gridData2.heightHint = 88;
 		contentTypesTree.setLayoutData(gridData2);
 		setupContentTypes((TreeItem) null, (IContentType) null);
@@ -151,7 +151,7 @@ public class IndentGuidePreferencePage extends PreferencePage implements
 	@Override
 	protected void performDefaults() {
 		super.performDefaults();
-		IPreferenceStore store = getPreferenceStore();
+		final IPreferenceStore store = getPreferenceStore();
 		enabled.setSelection(store
 				.getDefaultBoolean(PreferenceConstants.ENABLED));
 		lineAlpha.setSelection(store
@@ -173,19 +173,19 @@ public class IndentGuidePreferencePage extends PreferencePage implements
 		skipCommentBlock.setSelection(store
 				.getDefaultBoolean(PreferenceConstants.SKIP_COMMENT_BLOCK));
 		enableControls(enabled.getSelection());
-		for (TreeItem item : contentTypesTree.getItems()) {
+		for (final TreeItem item : contentTypesTree.getItems()) {
 			checkItems(item, false);
 		}
-		String type = store.getDefaultString(PreferenceConstants.CONTENT_TYPES);
-		String types[] = type.split("\\|");
-		for (TreeItem child : contentTypesTree.getItems()) {
+		final String type = store.getDefaultString(PreferenceConstants.CONTENT_TYPES);
+		final String types[] = type.split("\\|");
+		for (final TreeItem child : contentTypesTree.getItems()) {
 			checkContentType(child, types);
 		}
 	}
 
 	@Override
 	public boolean performOk() {
-		IPreferenceStore store = getPreferenceStore();
+		final IPreferenceStore store = getPreferenceStore();
 		store.setValue(PreferenceConstants.ENABLED, enabled.getSelection());
 		store.setValue(PreferenceConstants.LINE_ALPHA, lineAlpha.getSelection());
 		store.setValue(PreferenceConstants.LINE_STYLE,
@@ -193,8 +193,8 @@ public class IndentGuidePreferencePage extends PreferencePage implements
 		store.setValue(PreferenceConstants.LINE_WIDTH, lineWidth.getSelection());
 		store.setValue(PreferenceConstants.LINE_SHIFT, lineShift.getSelection());
 		colorFieldEditor.store();
-		RGB rgb = colorFieldEditor.getColorSelector().getColorValue();
-		Color color = new Color(PlatformUI.getWorkbench().getDisplay(), rgb);
+		final RGB rgb = colorFieldEditor.getColorSelector().getColorValue();
+		final Color color = new Color(PlatformUI.getWorkbench().getDisplay(), rgb);
 		Activator.getDefault().setColor(color);
 		store.setValue(PreferenceConstants.DRAW_LEFT_END,
 				drawLeftEnd.getSelection());
@@ -203,7 +203,7 @@ public class IndentGuidePreferencePage extends PreferencePage implements
 		store.setValue(PreferenceConstants.SKIP_COMMENT_BLOCK,
 				skipCommentBlock.getSelection());
 		String types = "";
-		for (TreeItem item : contentTypesTree.getItems()) {
+		for (final TreeItem item : contentTypesTree.getItems()) {
 			types = getContentTypes(item, types);
 		}
 		store.setValue(PreferenceConstants.CONTENT_TYPES, types);
@@ -211,7 +211,7 @@ public class IndentGuidePreferencePage extends PreferencePage implements
 	}
 
 	private void loadPreferences() {
-		IPreferenceStore store = getPreferenceStore();
+		final IPreferenceStore store = getPreferenceStore();
 		enabled.setSelection(store.getBoolean(PreferenceConstants.ENABLED));
 		lineAlpha.setSelection(store.getInt(PreferenceConstants.LINE_ALPHA));
 		int index = store.getInt(PreferenceConstants.LINE_STYLE) - 1;
@@ -229,26 +229,26 @@ public class IndentGuidePreferencePage extends PreferencePage implements
 		skipCommentBlock.setSelection(store
 				.getBoolean(PreferenceConstants.SKIP_COMMENT_BLOCK));
 		enableControls(enabled.getSelection());
-		String type = store.getString(PreferenceConstants.CONTENT_TYPES);
-		String types[] = type.split("\\|");
-		for (TreeItem child : contentTypesTree.getItems()) {
+		final String type = store.getString(PreferenceConstants.CONTENT_TYPES);
+		final String types[] = type.split("\\|");
+		for (final TreeItem child : contentTypesTree.getItems()) {
 			checkContentType(child, types);
 		}
 	}
 
-	private void enableControls(boolean enabled) {
-		for (Control control : attributes.getChildren()) {
+	private void enableControls(final boolean enabled) {
+		for (final Control control : attributes.getChildren()) {
 			control.setEnabled(enabled);
 		}
-		for (Control control : drawing.getChildren()) {
+		for (final Control control : drawing.getChildren()) {
 			control.setEnabled(enabled);
 		}
-		for (Control control : target.getChildren()) {
+		for (final Control control : target.getChildren()) {
 			control.setEnabled(enabled);
 		}
 	}
 
-	private String getContentTypes(TreeItem item, String types) {
+	private String getContentTypes(final TreeItem item, final String types) {
 		String result = types;
 		if (item.getChecked() && !item.getGrayed()) {
 			if (!"".equals(types)) {
@@ -256,18 +256,18 @@ public class IndentGuidePreferencePage extends PreferencePage implements
 			}
 			result += item.getData();
 		}
-		for (TreeItem child : item.getItems()) {
+		for (final TreeItem child : item.getItems()) {
 			result = getContentTypes(child, result);
 		}
 		return result;
 	}
 
-	private void checkContentType(TreeItem item, String[] types) {
-		for (TreeItem child : item.getItems()) {
+	private void checkContentType(final TreeItem item, final String[] types) {
+		for (final TreeItem child : item.getItems()) {
 			checkContentType(child, types);
 		}
-		String id = (String) item.getData();
-		for (String type : types) {
+		final String id = (String) item.getData();
+		for (final String type : types) {
 			if (id.equals(type)) {
 				item.setChecked(true);
 				break;
@@ -275,25 +275,24 @@ public class IndentGuidePreferencePage extends PreferencePage implements
 		}
 	}
 
-	private void checkItems(TreeItem item, boolean checked) {
+	private void checkItems(final TreeItem item, final boolean checked) {
 		item.setChecked(checked);
-		TreeItem[] items = item.getItems();
-		for (int i = 0; i < items.length; i++) {
-			checkItems(items[i], checked);
+		final TreeItem[] items = item.getItems();
+		for (final TreeItem item2 : items) {
+			checkItems(item2, checked);
 		}
 	}
 
-	private void setupContentTypes(TreeItem parent, IContentType baseType) {
-		IContentTypeManager manager = Platform.getContentTypeManager();
-		IContentType[] contentTypes = manager.getAllContentTypes();
-		for (int i = 0; i < contentTypes.length; i++) {
-			IContentType type = contentTypes[i];
+	private void setupContentTypes(final TreeItem parent, final IContentType baseType) {
+		final IContentTypeManager manager = Platform.getContentTypeManager();
+		final IContentType[] contentTypes = manager.getAllContentTypes();
+		for (final IContentType type : contentTypes) {
 			if (equals(type.getBaseType(), baseType) && type.isKindOf(textType)) {
 				TreeItem item = null;
 				if (parent == null) {
 					item = new TreeItem(contentTypesTree, SWT.NONE);
 				} else {
-					item = new TreeItem((TreeItem) parent, SWT.NONE);
+					item = new TreeItem(parent, SWT.NONE);
 				}
 				item.setText(type.getName());
 				item.setData(type.getId());
@@ -302,8 +301,8 @@ public class IndentGuidePreferencePage extends PreferencePage implements
 		}
 	}
 
-	private boolean equals(Object left, Object right) {
-		return left == null ? right == null : ((right != null) && left
-				.equals(right));
+	private boolean equals(final Object left, final Object right) {
+		return left == null ? right == null : right != null && left
+				.equals(right);
 	}
 }
