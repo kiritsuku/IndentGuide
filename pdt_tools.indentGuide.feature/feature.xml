@@ -2,7 +2,7 @@
 <feature
       id="jp.sourceforge.pdt_tools.indentGuide.feature"
       label="Indent Guide"
-      version="1.3.2.v20120803"
+      version="1.4.0"
       provider-name="https://github.com/sschaef">
 
    <description>
