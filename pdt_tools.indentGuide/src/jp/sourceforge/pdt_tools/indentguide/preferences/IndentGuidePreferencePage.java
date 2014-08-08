@@ -11,6 +11,7 @@ import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
@@ -141,6 +142,16 @@ IWorkbenchPreferencePage {
     final GridData gridData2 = new GridData(SWT.FILL, SWT.BEGINNING, true, false);
     gridData2.heightHint = 88;
     contentTypesTree.setLayoutData(gridData2);
+    contentTypesTree.addSelectionListener(new SelectionListener() {
+
+      public void widgetSelected(final SelectionEvent e) {
+        final TreeItem selection = contentTypesTree.getSelection()[0];
+        final boolean isChecked = selection.getChecked();
+        checkItems(selection, isChecked);
+      }
+
+      public void widgetDefaultSelected(final SelectionEvent e) {}
+    });
     setupContentTypes((TreeItem) null, (IContentType) null);
 
     loadPreferences();
