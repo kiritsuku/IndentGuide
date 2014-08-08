@@ -3,11 +3,15 @@
       id="jp.sourceforge.pdt_tools.indentGuide.feature"
       label="Indent Guide"
       version="1.3.2.v20120803"
-      provider-name="sourceforge.jp/users/atlanto">
+      provider-name="https://github.com/sschaef">
 
    <description>
       Indent Guide Plug-in
    </description>
+
+   <url>
+      <update label="Indent Guide" url="https://github.com/sschaef/IndentGuide/tree/master/pdt_tools.indentGuide.updateSite"/>
+   </url>
 
    <plugin
          id="jp.sourceforge.pdt_tools.indentGuide"
