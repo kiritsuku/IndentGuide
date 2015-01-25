@@ -173,6 +173,7 @@ public class IndentGuidePainter implements IPainter, PaintListener {
 			gc.setForeground(Activator.getDefault().getColor());
 			gc.setLineStyle(lineStyle);
 			gc.setLineWidth(lineWidth);
+			spaceWidth = gc.getAdvanceWidth(' ');
 			if (fIsAdvancedGraphicsPresent) {
 				int alpha = gc.getAlpha();
 				gc.setAlpha(this.lineAlpha);
@@ -202,7 +203,6 @@ public class IndentGuidePainter implements IPainter, PaintListener {
 	 */
 	private void drawLineRange(GC gc, int startLine, int endLine, int x, int w) {
 		int tabs = fTextWidget.getTabs();
-		spaceWidth = gc.getAdvanceWidth(' ');
 
 		StyledTextContent content = fTextWidget.getContent();
 		for (int line = startLine; line <= endLine; line++) {
