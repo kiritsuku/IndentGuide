@@ -1,5 +1,7 @@
 ## Indent Guide plug-in for Eclipse
 
+Warning: This repo is not actively maintained. Please fork and fix bugs by yourself if you find one.
+
 ### Feature
 This plug-in adds 'Indent Guide' (vertical line on indentation columns) to eclipse text editor.
 
